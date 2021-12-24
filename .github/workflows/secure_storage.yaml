@@ -1,0 +1,26 @@
+name: secure_storage
+
+on:
+  pull_request:
+    paths:
+      - "frontend/packages/storage/secure_storage/**"
+      - ".github/workflows/secure_storage.yaml"
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: frontend/packages/storage/secure_storage
+    runs-on: ubuntu-latest
+
+    steps:    
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1.5.0
+        with:
+          channel: "stable"
+
+      - name: Install Dependencies
+        run: flutter packages get
+            
+      - name: Run tests
+        run: flutter test -x presubmit-only --no-pub --coverage --test-randomize-ordering-seed random

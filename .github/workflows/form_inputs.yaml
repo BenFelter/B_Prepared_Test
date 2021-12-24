@@ -1,0 +1,26 @@
+name: form_inputs
+
+on:
+  pull_request:
+    paths:
+      - "frontend/packages/form_inputs/**"
+      - ".github/workflows/form_inputs.yaml"
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: frontend/packages/form_inputs
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1.5.0
+        with:
+          channel: "stable"
+
+      - name: Install Dependencies
+        run: flutter packages get
+
+      - name: Run tests
+        run: flutter test -x presubmit-only --no-pub --coverage --test-randomize-ordering-seed random            

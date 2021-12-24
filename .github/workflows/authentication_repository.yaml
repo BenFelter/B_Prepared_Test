@@ -1,0 +1,26 @@
+name: authentication_repository
+
+on:
+  pull_request:
+    paths:
+      - "frontend/packages/authentication_repository/**"
+      - ".github/workflows/authentication_repository.yaml"
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: frontend/packages/authentication_repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: subosito/flutter-action@v1.5.0
+        with:
+          channel: "stable"
+
+      - name: Install Dependencies
+        run: flutter packages get
+
+      - name: Run tests
+        run: flutter test -x presubmit-only --no-pub --coverage --test-randomize-ordering-seed random            

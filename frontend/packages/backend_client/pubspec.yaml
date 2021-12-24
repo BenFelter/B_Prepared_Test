@@ -1,0 +1,17 @@
+name: backend_client
+description: A backend client that handles communication with the B-Prepared REST API
+publish_to: none
+
+environment:
+  sdk: ">=2.12.0 <3.0.0"
+
+dependencies:
+  storage:
+    path: ../storage/storage
+  dio: ^4.0.0
+  fresh_dio: ^0.3.1
+  json_annotation: ^4.0.1
+
+dev_dependencies:  
+  json_serializable: ^5.0.0
+  build_runner: ^2.0.6
